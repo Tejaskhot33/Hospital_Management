@@ -27,7 +27,9 @@ public class HospitalController {
 
 	@Autowired
 	private HospitalService service;
-
+	
+	@ApiOperation(notes = "This API is used to save the Hospital details", value = "Save Hospital API")
+	@ApiResponses(value= {@ApiResponse(code =201 , message ="Data Save Successfully")})
 	@PostMapping
 	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital) {
 		return service.saveHospital(hospital);
@@ -39,23 +41,28 @@ public class HospitalController {
 	public ResponseEntity<ResponseStructure<Hospital>> getHospitalById(@RequestParam int id) {
 		return service.getHospitalById(id);
 	}
-
+	@ApiOperation(notes = "This API is used to delete the Hospital details", value = "Delete Hospital API")
+	@ApiResponses(value= {@ApiResponse(code =200 , message ="Data Deleted Successfully")})
 	@DeleteMapping
 	public ResponseEntity<ResponseStructure<Hospital>> deleteHospital(@RequestParam int id) {
 		return service.deleteHospital(id);
 	}
-
+	@ApiOperation(notes = "This API is used to update the Hospital details", value = "update Hospital API")
+	@ApiResponses(value= {@ApiResponse(code =200, message ="Data udpdate Successfully")})
 	@PutMapping
 	public ResponseEntity<ResponseStructure<Hospital>> updateHospital(@RequestParam int id,
 			@RequestBody Hospital hospital) {
 		return service.updateHospital(id, hospital);
 	}
-
+	@ApiOperation(notes = "This API is used to get the Hospital details", value = "Get Hospital API")
+	@ApiResponses(value= {@ApiResponse(code =200 , message ="Data found Successfully")})
 	@GetMapping("/email")
 	public ResponseEntity<ResponseStructure<Hospital>> getHospitalByEmail(@RequestParam String email) {
 		return service.getHospitalByEmail(email);
 	}
 
+	@ApiOperation(notes = "This API is used to findAll Hospital details", value = "FindAll Hospital API")
+	@ApiResponses(value= {@ApiResponse(code =200 , message ="Data Found Successfully")})
 	@GetMapping("/findAll")
 	public List<Hospital> getAllHospital() {
 		return service.getAllHospital();
