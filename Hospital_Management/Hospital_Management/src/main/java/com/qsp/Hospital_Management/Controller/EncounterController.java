@@ -1,6 +1,9 @@
 package com.qsp.Hospital_Management.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,21 +25,25 @@ public class EncounterController {
 	private EncounterService service;
 	
 	@PostMapping
-	public ResponseStructure<Encounter> saveEncounter(@RequestBody Encounter encounter,@RequestParam int pid ,@RequestParam int bid ) {
+	public ResponseEntity<ResponseStructure<Encounter>> saveEncounter(@RequestBody Encounter encounter,@RequestParam int pid ,@RequestParam int bid ) {
 		return service.saveEncounter(encounter,pid,bid);
 		
 	}
 	@GetMapping
-	public ResponseStructure<Encounter> getEncounterById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Encounter>> getEncounterById(@RequestParam int id) {
 		return service.getEncounterById(id);
 	}
 	@DeleteMapping
-	public ResponseStructure<Encounter> deleteEncounter(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Encounter>> deleteEncounter(@RequestParam int id) {
 		return service.deleteEncounter(id);
 	}
 	@PutMapping
-	public ResponseStructure<Encounter> updateEncounter(@RequestParam int id , @RequestBody Encounter encounter,@RequestParam int pid ,@RequestParam int bid) {
+	public ResponseEntity<ResponseStructure<Encounter>> updateEncounter(@RequestParam int id , @RequestBody Encounter encounter,@RequestParam int pid ,@RequestParam int bid) {
 		return service.updateEncounter(encounter,id,pid,bid);
+	}
+	@GetMapping("/findAll")
+	public ResponseEntity<ResponseStructure<List<Encounter>>> findAll() {
+		return service.findAll();
 	}
 	
 	

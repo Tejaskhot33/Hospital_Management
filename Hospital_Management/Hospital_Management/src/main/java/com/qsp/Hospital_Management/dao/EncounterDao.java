@@ -1,5 +1,6 @@
 package com.qsp.Hospital_Management.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,6 +47,11 @@ public class EncounterDao {
 
 		}
 		return null;
+	}
+
+	public List<Encounter> findAll() {
+		
+		return repo.findAll();
 	}
 
 }

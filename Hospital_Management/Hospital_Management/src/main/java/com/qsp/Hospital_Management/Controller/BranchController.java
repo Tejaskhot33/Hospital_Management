@@ -1,5 +1,7 @@
 package com.qsp.Hospital_Management.Controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -28,18 +30,21 @@ public class BranchController {
 		
 	}
 	@GetMapping
-	public Branch getBranchById(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Branch>> getBranchById(@RequestParam int id) {
 		return service.getBranchById(id);
 	}
 	@DeleteMapping
-	public Branch deleteBranch(@RequestParam int id) {
+	public ResponseEntity<ResponseStructure<Branch>> deleteBranch(@RequestParam int id) {
 		return service.deleteBranch(id);
 	}
 	@PutMapping
-	public Branch updateBranch(@RequestParam int id ,@RequestBody Branch branch ,@RequestParam int hid, @RequestParam int aid) {
+	public ResponseEntity<ResponseStructure<Branch>> updateBranch(@RequestParam int id ,@RequestBody Branch branch ,@RequestParam int hid, @RequestParam int aid) {
 		return service.updateBranch(id,branch,hid,aid);
 	}
-	
+	@GetMapping("/findAll")
+	public ResponseEntity<ResponseStructure<List<Branch>>> findAll(){
+		return service.findAll();
+	}
 
 	
 	

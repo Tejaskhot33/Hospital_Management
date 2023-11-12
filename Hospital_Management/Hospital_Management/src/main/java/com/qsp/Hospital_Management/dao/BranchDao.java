@@ -1,5 +1,6 @@
 package com.qsp.Hospital_Management.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +48,11 @@ public class BranchDao {
 			}
 		}
 		return null;
+	}
+
+	public List<Branch> findAll() {
+		
+		return repo.findAll();
 	}
 
 }

@@ -1,5 +1,6 @@
 package com.qsp.Hospital_Management.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,31 @@ public class MedIteamsDao {
 			return null;
 		}
 		return optional.get();
+	}
+
+	public MedIteams deleteMedIteams(int id) {
+
+		Optional<MedIteams> optional = repo.findById(id);
+		if (optional.isEmpty()) {
+			repo.deleteById(id);
+			return optional.get();
+		}
+		return null;
+	}
+
+	public List<MedIteams> findAll() {
+
+		return repo.findAll();
+	}
+
+	public MedIteams updateMedIteams(int id, MedIteams medIteams) {
+
+		Optional<MedIteams> optional = repo.findById(id);
+		if (optional.isPresent()) {
+			medIteams.setId(id);
+			return repo.save(medIteams);
+		}
+		return null;
 	}
 
 }

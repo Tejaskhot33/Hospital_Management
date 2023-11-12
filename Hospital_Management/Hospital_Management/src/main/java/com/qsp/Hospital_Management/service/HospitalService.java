@@ -80,7 +80,7 @@ public class HospitalService {
 		if (hospital != null) {
 			structure.setMessage("Hospital updated successfully");
 			structure.setStatus(HttpStatus.FOUND.value());
-			structure.setData(hospital);
+			structure.setData(dao.getHospitalByEmail(email));
 			return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.FOUND);
 		} else {
 			throw new EmailNotFound("Email Not Found");

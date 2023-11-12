@@ -1,5 +1,6 @@
 package com.qsp.Hospital_Management.dao;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,5 +49,10 @@ public class PersonDao {
 			}
 			return null;
 		}
+	}
+
+	public List<Person> findAll() {
+		
+		return repo.findAll(); 
 	}
 }
