@@ -51,8 +51,8 @@ public class AddressDao {
 		return null;
 	}
 
-	public Address getAddressByPincode(int pincode) {
-		
+	public List<Address> getAddressByPincode(int pincode) {
+					
 		
 		return repo.findAddressByPincode(pincode);
 	}

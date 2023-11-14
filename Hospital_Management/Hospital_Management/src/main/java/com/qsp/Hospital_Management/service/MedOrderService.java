@@ -43,11 +43,11 @@ public class MedOrderService {
 		ResponseStructure<MedOrder> structure = new ResponseStructure<>();
 		MedOrder medorder = dao.getMedOrderById(id);
 		if (medorder != null) {
-			structure.setMessage("MedOrder Saved Successfully");
-			structure.setStatus(HttpStatus.CREATED.value());
+			structure.setMessage("MedOrder Found Successfully");
+			structure.setStatus(HttpStatus.FOUND.value());
 			structure.setData(medorder);
 
-			return new ResponseEntity<ResponseStructure<MedOrder>>(structure, HttpStatus.CREATED);
+			return new ResponseEntity<ResponseStructure<MedOrder>>(structure, HttpStatus.FOUND);
 		} else {
 			throw new IdNotFound("Id Not Found Exception");
 		}
@@ -71,19 +71,20 @@ public class MedOrderService {
 		Encounter encounter = encounterDao.getEncounterById(eid);
 		if (encounter != null) {
 			medorder.setEncounter(encounter);
+			MedOrder medorder1 = dao.updateMedOrder(medorder, id);
 			structure.setMessage("MedOrder updated Successfully");
 			structure.setStatus(HttpStatus.OK.value());
-			structure.setData(medorder);
-			return new ResponseEntity<ResponseStructure<MedOrder>>(structure, HttpStatus.CREATED);
+			structure.setData(medorder1);
+			return new ResponseEntity<ResponseStructure<MedOrder>>(structure, HttpStatus.OK);
 		} else {
 			throw new IdNotFound("Id Not Found Exception");
 		}
 
 	}
 
-	public ResponseEntity<ResponseStructure<List<MedOrder>>> FindAllMedOrder() {
+	public ResponseEntity<ResponseStructure<List<MedOrder>>> FindAll() {
 		ResponseStructure<List<MedOrder>> structure = new ResponseStructure<>();
-		List<MedOrder> medOrder = dao.FindAllMedOrder();
+		List<MedOrder> medOrder = dao.FindAll();
 		if (medOrder != null) {
 			structure.setMessage("All Data Found Successfully");
 			structure.setStatus(HttpStatus.FOUND.value());

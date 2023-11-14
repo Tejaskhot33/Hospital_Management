@@ -2,6 +2,8 @@ package com.qsp.Hospital_Management.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -31,7 +33,7 @@ public class HospitalController {
 	@ApiOperation(notes = "This API is used to save the Hospital details", value = "Save Hospital API")
 	@ApiResponses(value= {@ApiResponse(code =201 , message ="Data Save Successfully")})
 	@PostMapping
-	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@RequestBody Hospital hospital) {
+	public ResponseEntity<ResponseStructure<Hospital>> saveHospital(@Valid @RequestBody Hospital hospital) {
 		return service.saveHospital(hospital);
 	}
 
@@ -56,7 +58,7 @@ public class HospitalController {
 	}
 	@ApiOperation(notes = "This API is used to get the Hospital details", value = "Get Hospital API")
 	@ApiResponses(value= {@ApiResponse(code =200 , message ="Data found Successfully")})
-	@GetMapping("/email")
+	@GetMapping("/FindEmail")
 	public ResponseEntity<ResponseStructure<Hospital>> getHospitalByEmail(@RequestParam String email) {
 		return service.getHospitalByEmail(email);
 	}
@@ -64,7 +66,7 @@ public class HospitalController {
 	@ApiOperation(notes = "This API is used to findAll Hospital details", value = "FindAll Hospital API")
 	@ApiResponses(value= {@ApiResponse(code =200 , message ="Data Found Successfully")})
 	@GetMapping("/findAll")
-	public List<Hospital> getAllHospital() {
+	public ResponseEntity<ResponseStructure<List<Hospital>>> getAllHospital() {
 		return service.getAllHospital();
 	}
 

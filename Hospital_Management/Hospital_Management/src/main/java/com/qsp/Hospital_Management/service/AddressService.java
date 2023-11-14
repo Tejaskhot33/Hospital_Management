@@ -72,16 +72,16 @@ public class AddressService {
 		}
 	}
 
-	public ResponseEntity<ResponseStructure<Address>> getAddressByPincode(int pincode) {
-		Address address = dao.getAddressByPincode(pincode);
-		ResponseStructure<Address> responseStructure = new ResponseStructure<>();
-		if (address != null) {
+	public ResponseEntity<ResponseStructure<List<Address>>> getAddressByPincode(int pincode) {
+		List<Address> address = dao.getAddressByPincode(pincode);
+		ResponseStructure<List<Address>> responseStructure = new ResponseStructure<>();
+		if (address != null && !address.isEmpty()) {
 			responseStructure.setMessage("Address Found by pincode successfully");
 			responseStructure.setStatus(HttpStatus.FOUND.value());
 			responseStructure.setData(address);
-			return new ResponseEntity<ResponseStructure<Address>>(responseStructure, HttpStatus.FOUND);
+			return new ResponseEntity<ResponseStructure<List<Address>>>(responseStructure, HttpStatus.FOUND);
 		} else {
-			throw new PinCodeNotFound("Hospital With given Pincode not found");
+			throw new PinCodeNotFound("No Address found With given Pincode ");
 		}
 	}
 

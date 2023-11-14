@@ -34,9 +34,10 @@ public class BranchService {
 		if (hospital != null && address != null) {
 			branch.setHospital(hospital);
 			branch.setAddress(address);
+			Branch branch1 =dao.saveBranch(branch);
 			structure.setMessage("Branch Saved Successfully");
 			structure.setStatus(HttpStatus.CREATED.value());
-			structure.setData(branch);
+			structure.setData(branch1);
 			return new ResponseEntity<ResponseStructure<Branch>>(structure, HttpStatus.CREATED);
 		}
 		return null;
@@ -72,12 +73,12 @@ public class BranchService {
 
 	public ResponseEntity<ResponseStructure<Branch>> updateBranch(int id, Branch branch, int hid, int aid) {
 		ResponseStructure<Branch> structure = new ResponseStructure<>();
-		Branch branch2 = dao.updateBranch(branch, id);
 		Hospital hospital = hospitalDao.getHospitalById(hid);
 		Address address = addressDao.getAddressById(aid);
 		if (hospital != null && address != null) {
 			branch.setAddress(address);
 			branch.setHospital(hospital);
+			Branch branch2 = dao.updateBranch(branch, id);
 			structure.setMessage("Branch Update Successfully");
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setData(branch2);

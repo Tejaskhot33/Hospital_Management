@@ -2,6 +2,8 @@ package com.qsp.Hospital_Management.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +32,7 @@ public class EncounterController {
 	@ApiOperation(notes = "This API is used to save the Encounter details", value = "Save Encounter API")
 	@ApiResponses(value= {@ApiResponse(code =201 , message ="Data Save Successfully")})
 	@PostMapping
-	public ResponseEntity<ResponseStructure<Encounter>> saveEncounter(@RequestBody Encounter encounter,@RequestParam int pid ,@RequestParam int bid ) {
+	public ResponseEntity<ResponseStructure<Encounter>> saveEncounter(@Valid @RequestBody Encounter encounter,@RequestParam int pid ,@RequestParam int bid ) {
 		return service.saveEncounter(encounter,pid,bid);
 	}
 	@ApiOperation(notes = "This API is used to get the Encounter details", value = "Get Encounter API")

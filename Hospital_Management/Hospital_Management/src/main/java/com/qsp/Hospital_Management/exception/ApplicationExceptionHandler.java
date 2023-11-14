@@ -29,23 +29,6 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST);
 	}
 
-	@Override
-	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-			HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-		List<ObjectError> errors = ex.getAllErrors();
-		Map<String, String> map = new HashMap<>();
-		for (ObjectError objectError : errors) {
-			FieldError error = (FieldError) objectError;
-			String fieldName = error.getField();
-			String message = error.getDefaultMessage();
-
-			map.put(fieldName, message);
-
-		}
-
-		return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
-	}
 
 	@ExceptionHandler(PinCodeNotFound.class)
 	public ResponseEntity<ResponseStructure<String>> pinCodeNotFound(PinCodeNotFound ex) {
@@ -64,6 +47,32 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 		structure.setData(ex.getMessage());
 		return new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST);
 
+	}
+	@ExceptionHandler(EmailNotFound.class)
+	public ResponseEntity<ResponseStructure<String>> emailNotFound(EmailNotFound ex){
+		ResponseStructure<String> structure = new ResponseStructure<>();
+		structure.setMessage("No Email Found Exception");
+		structure.setStatus(HttpStatus.BAD_REQUEST.value());
+		structure.setData(ex.getMessage());
+		return  new ResponseEntity<ResponseStructure<String>>(structure, HttpStatus.BAD_REQUEST);
+	}
+
+	@Override
+	protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
+			HttpHeaders headers, HttpStatus status, WebRequest request) {
+
+		List<ObjectError> errors = ex.getAllErrors();
+		Map<String, String> map = new HashMap<>();
+		for (ObjectError objectError : errors) {
+			FieldError error = (FieldError) objectError;
+			String fieldName = error.getField();
+			String message = error.getDefaultMessage();
+
+			map.put(fieldName, message);
+
+		}
+
+		return new ResponseEntity<Object>(map, HttpStatus.BAD_REQUEST);
 	}
 
 }

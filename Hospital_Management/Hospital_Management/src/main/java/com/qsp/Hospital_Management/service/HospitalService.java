@@ -68,9 +68,9 @@ public class HospitalService {
 			structure.setStatus(HttpStatus.FOUND.value());
 			structure.setData(dao.updateHospital(id, hospital));
 			return new ResponseEntity<ResponseStructure<Hospital>>(structure, HttpStatus.FOUND);
-		}else {
+		} else {
 			throw new IdNotFound("Id Not Found");
-			
+
 		}
 	}
 
@@ -88,9 +88,18 @@ public class HospitalService {
 
 	}
 
-	public List<Hospital> getAllHospital() {
+	public ResponseEntity<ResponseStructure<List<Hospital>>> getAllHospital() {
+		ResponseStructure<List<Hospital>> structure = new ResponseStructure<>();
+		List<Hospital> hospital = dao.getAllHospital();
+		if (hospital != null) {
+			structure.setMessage("Hospital updated successfully");
+			structure.setStatus(HttpStatus.FOUND.value());
+			structure.setData(hospital);
+			return new ResponseEntity<ResponseStructure<List<Hospital>>>(structure, HttpStatus.FOUND);
+		} else {
+			throw new EmailNotFound("Email Not Found");
+		}
 
-		return dao.getAllHospital();
 	}
 
 }

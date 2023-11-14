@@ -2,6 +2,8 @@ package com.qsp.Hospital_Management.Controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -30,7 +32,7 @@ public class AddressController {
 	@ApiOperation(notes = "This API is used to save the Address details", value = "Save Address API")
 	@ApiResponses(value= {@ApiResponse(code =201 , message ="Data Save Successfully")})
 	@PostMapping
-	public ResponseEntity<ResponseStructure<Address>> saveAddress(@RequestBody Address address) {
+	public ResponseEntity<ResponseStructure<Address>> saveAddress(@Valid @RequestBody Address address) {
 		return service.saveAddress(address);
 	}
 	@ApiOperation(notes = "This API is used to get the Address details", value = "Get Address API")
@@ -51,10 +53,10 @@ public class AddressController {
 	public ResponseEntity<ResponseStructure<Address>> updateAddress(@RequestParam int id , @RequestBody Address address) {
 		return service.updateAddress(id,address);
 	}
-	@ApiOperation(notes = "This API is used to get the Address details", value = "Get Address API")
-	@ApiResponses(value= {@ApiResponse(code =200 , message ="Data deleted Successfully")})
+	@ApiOperation(notes = "This API is used to get the pincode details", value = "Get Address API")
+	@ApiResponses(value= {@ApiResponse(code =302 , message ="Pincode found Successfully")})
 	@GetMapping("/pincode")
-	public ResponseEntity<ResponseStructure<Address>> getAddressByPincode(@RequestParam int pincode){
+	public ResponseEntity<ResponseStructure<List<Address>>> getAddressByPincode(@RequestParam int pincode){
 		return service.getAddressByPincode(pincode);	
 	}
 	@ApiOperation(notes = "This API is used to FindAll the Address details", value = "FindAll Address API")

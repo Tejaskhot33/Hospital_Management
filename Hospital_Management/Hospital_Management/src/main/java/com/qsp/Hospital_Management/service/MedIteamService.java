@@ -57,7 +57,7 @@ public class MedIteamService {
 		ResponseStructure<MedIteams> structure = new ResponseStructure<>();
 		if (medOrder != null) {
 			medIteams.setMedorder(medOrder);
-			MedIteams medIteams1 = dao.updateMedIteams(mid, medIteams);
+			MedIteams medIteams1 = dao.updateMedIteams(id, medIteams);
 			structure.setMessage("MedIteams Updated Successfully");
 			structure.setStatus(HttpStatus.OK.value());
 			structure.setData(medIteams1);

@@ -47,7 +47,7 @@ public class MedOrderDao {
 		return null;
 	}
 
-	public List<MedOrder> FindAllMedOrder() {
+	public List<MedOrder> FindAll() {
 		
 		return repo.findAll();
 	}

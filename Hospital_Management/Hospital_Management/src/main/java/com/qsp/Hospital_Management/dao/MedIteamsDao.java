@@ -30,7 +30,7 @@ public class MedIteamsDao {
 	public MedIteams deleteMedIteams(int id) {
 
 		Optional<MedIteams> optional = repo.findById(id);
-		if (optional.isEmpty()) {
+		if (optional.isPresent()) {
 			repo.deleteById(id);
 			return optional.get();
 		}
